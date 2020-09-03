@@ -1,7 +1,9 @@
 import random
 
-class Spouse:
-	def __init__(self, gender="male"):
+class Person:
+	def __init__(self, gender):
+		#if gender != "male":
+		#	gender = "female"
 		self.Gender = gender
 
 	def Gender(self):
@@ -11,10 +13,15 @@ class Spouse:
 	def Age(self):
 		age = random.randint(18,100)
 		return age
+	
+	def foo(self):
+		pass
 
-	def MaleFirstName(self):
+	def FirstName(self):
+		
+		if self.Gender == "male":
 
-		spouse_male_first_name = (
+			male_first_name = (
 			"James",
 			"John", 
 			"Robert", 
@@ -36,10 +43,12 @@ class Spouse:
 			"Andrew", 
 			"Kenneth"
 			)
-		return random.choice(spouse_male_first_name)
 
-	def FemaleFirstName(self):
-			spouse_female_first_name = (
+			return random.choice(male_first_name)
+
+		else:
+
+			female_first_name = (
 			"Mary", 
 			"Patricia", 
 			"Jennifer", 
@@ -61,10 +70,11 @@ class Spouse:
 			"Donna", 
 			"Emily"
 			)
-			return random.choice(spouse_female_first_name)
+
+			return random.choice(female_first_name)
 	
 	def Surname(self):
-		spouse_surname = (
+		surname = (
 			"Smith",
 			"Jones",
 			"Black",
@@ -92,9 +102,9 @@ class Spouse:
 			"Robinson"
 		)
 
-		return random.choice(spouse_surname)
+		return random.choice(surname)
 
-	def Spouse_Bio(self):
+	def Bio(self):
 		bio = (
 		"INSERT BIO 1",
 		"INSERT BIO 2",
@@ -104,21 +114,34 @@ class Spouse:
 
 	def Profile_Pic(self):
 
-		if Spouse.Gender == "male":
+		if self.Gender == "male":
+
 			male_picture = (
-				"male_pic1.jpg"
+				"male_pic1.jpg",
+				"male_pic2.jpg",
+				"male_pic3.jpg"
 				)
 			return random.choice(male_picture)
 		else:
 			female_picture = (
-				"female_pic1.jpg"
+				"female_pic1.jpg",
+				"female_pic2.jpg",
+				"female_pic3.jpg"
 			)
 		return random.choice(female_picture)
 
-s = Spouse("female")
-print(s.Gender)
-print(s.FemaleFirstName())
-print(s.Surname())
-print(s.Age())
-print(s.Spouse_Bio())
-print(s.Profile_Pic())
+m = Person("male")
+print(m.Gender)
+print(m.FirstName())
+print(m.Surname())
+print(m.Age())
+print(m.Bio())
+print(m.Profile_Pic())
+
+f = Person("female")
+print(f.Gender)
+print(f.FirstName())
+print(f.Surname())
+print(f.Age())
+print(f.Bio())
+print(f.Profile_Pic())
