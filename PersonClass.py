@@ -1,24 +1,40 @@
 import random
 
 class Person:
-	def __init__(self, gender):
+	""" Creates an instance of the Person class """
+	def __init__(self):
 		#if gender != "male":
 		#	gender = "female"
-		self.Gender = gender
+		#self.Gender = 
+		pass
 
-	def Gender(self):
-	
+	def CreateRandom(self):
+		""" Returns a tuple: Gender, Age, Firstname, Lastname, Bio, Picture """
+		sx = ("male", "female")
+		g = random.choice(sx)
+		self.Gender = g
+		a = self.Age()
+		fn = self.FirstName()
+		sn = self.Surname()
+		b = self.Bio()
+		pf = self.ProfilePic()
+		# return as dict?
+
+		return (g, a, fn, sn, b, pf) #tuple
+
+
+	def Gender(self, gender):
+		""" Assigns or returns a gender (str) """
+		self.Gender = gender
 		return self.Gender
 
 	def Age(self):
+		""" Generates a random age 18- 100 """
 		age = random.randint(18,100)
 		return age
-	
-	def foo(self):
-		pass
 
 	def FirstName(self):
-		
+		""" Returns a random name dependent on Gender """
 		if self.Gender == "male":
 
 			male_first_name = (
@@ -74,6 +90,7 @@ class Person:
 			return random.choice(female_first_name)
 	
 	def Surname(self):
+		""" Returns a random surname """
 		surname = (
 			"Smith",
 			"Jones",
@@ -105,6 +122,7 @@ class Person:
 		return random.choice(surname)
 
 	def Bio(self):
+		""" Returns a random bio """
 		bio = (
 		"INSERT BIO 1",
 		"INSERT BIO 2",
@@ -112,8 +130,8 @@ class Person:
 		)
 		return random.choice(bio)
 
-	def Profile_Pic(self):
-
+	def ProfilePic(self):
+		""" Returns a random picture """
 		if self.Gender == "male":
 
 			male_picture = (
@@ -129,14 +147,14 @@ class Person:
 				"female_pic3.jpg"
 			)
 		return random.choice(female_picture)
-
+"""
 m = Person("male")
 print(m.Gender)
 print(m.FirstName())
 print(m.Surname())
 print(m.Age())
 print(m.Bio())
-print(m.Profile_Pic())
+print(m.ProfilePic())
 
 f = Person("female")
 print(f.Gender)
@@ -144,4 +162,9 @@ print(f.FirstName())
 print(f.Surname())
 print(f.Age())
 print(f.Bio())
-print(f.Profile_Pic())
+print(f.ProfilePic())
+"""
+
+p = Person()
+r = p.CreateRandom()
+print(r)
