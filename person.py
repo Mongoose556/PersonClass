@@ -1,11 +1,25 @@
 import random
+import json
+
+#https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 
 # TODO: make attributes assignable, e.g. .Age = 25, Name = dave etc 
 # TODO: read names etc from a file?
+# TODO: age missing from output
 
 class Person:
 	""" Creates an instance of the Person class """
+
 	def __init__(self):
+		pass
+
+	def Bio_File(self, filename="bio.txt"):
+		pass
+
+	def Forename_File(self, filename="forenames.txt"):
+		pass
+
+	def Surname_File(self, filename="surname.json"):
 		pass
 
 	def Create_Random(self):
@@ -28,69 +42,35 @@ class Person:
 		self.Gender = gender
 		return self.Gender
 
-	def Age(self):
+	def Age(self, age=None):
 		""" Generates a random age 18- 100 """
-		a = random.randint(0,999)
+		if age == None:
+			a = random.randint(0,110)
+		else:
+			a = age
 		return a
 
-	def First_Name(self):
+	def First_Name(self, filename="/forenames.txt"):
+
 		""" Returns a random name dependent on Gender """
+		
+		""" Read a file to import names """
+
+		# read file
+		# parse forenames dictionary, key - names
+
 		if self.Gender == "male":
 
-			male_first_name = (
-			"James",
-			"John", 
-			"Robert", 
-			"Michael", 
-			"William", 
-			"David", 
-			"Richard", 
-			"Joseph", 
-			"Thomas", 
-			"Charles", 
-			"Christopher", 
-			"Daniel", 
-			"Matthew", 
-			"Anthony", 
-			"Donald", 
-			"Mark", 
-			"Paul", 
-			"Steven", 
-			"Andrew", 
-			"Kenneth",
-			"Wilson",
-			"Sean"
-			)
-
-			return random.choice(male_first_name)
+			with open(filename) as json_file:
+				forename = json.load(json_file)
+				for p in forename['male_forenames']:
+					return random.choice(forename['name'])
 
 		else:
-
-			female_first_name = (
-			"Mary", 
-			"Patricia", 
-			"Jennifer", 
-			"Linda", 
-			"Elizabeth", 
-			"Barbara", 
-			"Susan", 
-			"Jessica", 
-			"Sarah", 
-			"Karen", 
-			"Nancy", 
-			"Margaret", 
-			"Lisa", 
-			"Betty", 
-			"Dorothy", 
-			"Sandra", 
-			"Ashley", 
-			"Kimberly", 
-			"Donna", 
-			"Emily",
-			"Lori"
-			)
-
-			return random.choice(female_first_name)
+			with open(filename) as json_file:
+				forename = json.load(json_file)
+				for p in forename['female_forenames']:
+					return random.choice(forename['name'])
 	
 	def Surname(self):
 		""" Returns a random surname """

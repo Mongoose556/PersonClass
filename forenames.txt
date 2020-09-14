@@ -1,0 +1,50 @@
+male_forenames = {
+    "name": 
+    "James",
+    "John", 
+    "Robert", 
+    "Michael", 
+    "William", 
+    "David", 
+    "Richard", 
+    "Joseph", 
+    "Thomas", 
+    "Charles", 
+    "Christopher", 
+    "Daniel", 
+    "Matthew", 
+    "Anthony", 
+    "Donald", 
+    "Mark", 
+    "Paul", 
+    "Steven", 
+    "Andrew", 
+    "Kenneth",
+    "Manuel",
+    "Sean"
+}
+female_fornenames = {
+    "name":
+    "Mary", 
+    "Patricia", 
+    "Jennifer", 
+    "Linda", 
+    "Elizabeth", 
+    "Barbara", 
+    "Susan", 
+    "Jessica", 
+    "Sarah", 
+    "Karen", 
+    "Nancy", 
+    "Margaret", 
+    "Lisa", 
+    "Betty", 
+    "Dorothy", 
+    "Sandra", 
+    "Ashley", 
+    "Kimberly", 
+    "Donna", 
+    "Emily",
+    "Lori"
+}
+    
