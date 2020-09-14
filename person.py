@@ -1,6 +1,7 @@
 import random
 
 # TODO: make attributes assignable, e.g. .Age = 25, Name = dave etc 
+# TODO: read names etc from a file?
 
 class Person:
 	""" Creates an instance of the Person class """
