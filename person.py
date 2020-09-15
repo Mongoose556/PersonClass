@@ -11,7 +11,22 @@ class Person:
 	""" Creates an instance of the Person class """
 
 	def __init__(self):
-		pass
+		#read name files
+		from pathlib import Path
+		if not Path("female_names.json").is_file():
+			raise ValueError(f"Could not find file! female_names.json")
+
+		if not Path("male_names.json").is_file():
+			raise ValueError(f"Could not find file! male_names.json")
+
+		with open(male_names.json, 'r') as json_file:
+				forename = json.load(json_file)
+				return random.choice(forename['male_forenames'])
+
+		with open(filename, 'r') as json_file:
+			forename = json.load(json_file)
+			return random.choice(forename['male_forenames'])
+
 
 	def Bio_File(self, filename="bio.txt"):
 		pass
@@ -50,21 +65,22 @@ class Person:
 			a = age
 		return a
 
-	def First_Name(self, filename="/forenames.txt"):
+	def First_Name(self, filename="male_names.json"):
 
-		""" Returns a random name dependent on Gender """
-		
-		""" Read a file to import names """
+		""" Returns a random name dependent on Gender, reads a file to import names. Default male_names.json """
 
 		# read file
 		# parse forenames dictionary, key - names
 
+		from pathlib import Path
+		if not Path(filename).is_file():
+			raise ValueError(f"Could not find file! {filename}")
+
 		if self.Gender == "male":
 
-			with open(filename) as json_file:
+			with open(filename, 'r') as json_file:
 				forename = json.load(json_file)
-				for p in forename['male_forenames']:
-					return random.choice(forename['name'])
+				return random.choice(forename['male_forenames'])
 
 		else:
 			with open(filename) as json_file:

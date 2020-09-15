@@ -1,8 +1,6 @@
-male_forenames = {
-    "name": 
-    "James",
-    "John", 
-    "Robert", 
+{
+    "male_forenames":
+    ["James", "John", "Robert", 
     "Michael", 
     "William", 
     "David", 
@@ -21,10 +19,10 @@ male_forenames = {
     "Andrew", 
     "Kenneth",
     "Manuel",
-    "Sean"
+    "Sean"]
 }
 female_fornenames = {
-    "name":
+    "name":[
     "Mary", 
     "Patricia", 
     "Jennifer", 
@@ -45,6 +43,6 @@ female_fornenames = {
     "Kimberly", 
     "Donna", 
     "Emily",
-    "Lori"
+    "Lori"]
 }
     
