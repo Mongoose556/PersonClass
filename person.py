@@ -13,44 +13,78 @@ class Person:
 	def __init__(self):
 		#read name files
 		from pathlib import Path
+
 		if not Path("female_names.json").is_file():
 			raise ValueError(f"Could not find file! female_names.json")
 
 		if not Path("male_names.json").is_file():
 			raise ValueError(f"Could not find file! male_names.json")
 
-		with open(male_names.json, 'r') as json_file:
-				forename = json.load(json_file)
-				return random.choice(forename['male_forenames'])
+		if not Path("surnames.json").is_file():
+			raise ValueError(f"Could not find file! surnames.json")
 
-		with open(filename, 'r') as json_file:
-			forename = json.load(json_file)
-			return random.choice(forename['male_forenames'])
+		if not Path("bio.json").is_file():
+			raise ValueError(f"Could not find file! bio.json")
 
+		# male names
+		with open("male_names.json", 'r') as json_file:
+			male = {}
+			male = json.load(json_file)
+			self.Male_First_Name = male['male_forenames']
 
-	def Bio_File(self, filename="bio.txt"):
-		pass
+		# female names
+		with open("female_names.json", 'r') as json_file:
+			female = json.load(json_file)
+			self.Female_First_Name = female['female_forenames']
 
-	def Forename_File(self, filename="forenames.txt"):
-		pass
+		# surnames
+		with open("surnames.json", 'r') as json_file:
+			surname = json.load(json_file)
+			self.Surname =surname['surnames']
 
-	def Surname_File(self, filename="surname.json"):
+	def Male_First_Name(self, forename=""):
+		""" Returns a random male name """
+		if forename == None:
+			return random.choice(self.Male_First_Name())
+		else:
+			return forename
+
+	def Female_First_Name(self, forename=""):
+		""" Returns a random female name """
+		if forename == None:
+			return random.choice(self.Female_First_Name())
+		else:
+			return forename
+	
+	def Surname(self, surname=""):
+		""" Returns a random surname """
+		if forename == None:
+			return random.choice(self.Surname())
+		else:
+			return surname
+	
+
+	def Bio_File(self, filename="bio.json"):
 		pass
 
 	def Create_Random(self):
 		""" Returns a tuple: Gender, Firstname, Lastname, Age, Bio, Picture """
 		sex = ("male", "female")
 		g = random.choice(sex)
+
+		if g == "male":
+			fn = self.Male_First_Name()
+		else:
+			fn = self.Female_First_Name()
+
 		self.Gender = g
 		a = self.Age()
-		fn = self.First_Name()
 		sn = self.Surname()
 		b = self.Bio()
 		pf = self.Profile_Pic()
 		# return as dict?
 
 		return (g, fn, sn, a, b, pf) #tuple
-
 
 	def Gender(self, gender):
 		""" Assigns or returns a gender (str) """
@@ -64,61 +98,6 @@ class Person:
 		else:
 			a = age
 		return a
-
-	def First_Name(self, filename="male_names.json"):
-
-		""" Returns a random name dependent on Gender, reads a file to import names. Default male_names.json """
-
-		# read file
-		# parse forenames dictionary, key - names
-
-		from pathlib import Path
-		if not Path(filename).is_file():
-			raise ValueError(f"Could not find file! {filename}")
-
-		if self.Gender == "male":
-
-			with open(filename, 'r') as json_file:
-				forename = json.load(json_file)
-				return random.choice(forename['male_forenames'])
-
-		else:
-			with open(filename) as json_file:
-				forename = json.load(json_file)
-				for p in forename['female_forenames']:
-					return random.choice(forename['name'])
-	
-	def Surname(self):
-		""" Returns a random surname """
-		surname = (
-			"Smith",
-			"Jones",
-			"Black",
-			"White",
-			"Anderson",
-			"Bates",
-			"Clark",
-			"Davis",
-			"Easton",
-			"Johnson",
-			"Williams",
-			"Jones",
-			"Brown",
-			"Miller",
-			"Wilson",
-			"Moore",
-			"Taylor",
-			"Thomas",
-			"Jackson",
-			"Harris",
-			"Martin",
-			"Thompson",
-			"Garcia",
-			"Martinez",
-			"Robinson"
-		)
-
-		return random.choice(surname)
 
 	def Bio(self):
 		""" Returns a random bio """
@@ -150,24 +129,26 @@ class Person:
 				"female_pic3.jpg"
 			)
 		return random.choice(female_picture)
-'''		
+	
 m = Person()
-print(m.Gender)
-print(m.FirstName())
-print(m.Surname())
+print(m.Gender("male"))
+print(random.choice(m.Male_First_Name))
+print(random.choice(m.Surname))
 print(m.Age())
 print(m.Bio())
-print(m.ProfilePic())
+print(m.Profile_Pic())
 
+'''
 f = Person()
 print(f.Gender)
-print(f.FirstName())
+print(f.Female_First_Name())
 print(f.Surname())
 print(f.Age())
 print(f.Bio())
 print(f.ProfilePic())
+
 '''
 
-p = Person()
-r = p.Create_Random()
-print(r)
+#p = Person()
+#r = p.Male_First_Name()
+#print(r)
