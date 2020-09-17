@@ -1,120 +1,131 @@
 import random
 import json
+import logging
+
+logging.basicConfig(filename="person.log", level=logging.INFO, format='%(levelname)s:%(message)s')
 
 #https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 
 # TODO: make attributes assignable, e.g. .Age = 25, Name = dave etc 
-# TODO: read names etc from a file?
+# TODO: read names etc from a file
 # TODO: age missing from output
 
 class Person:
-	""" Creates an instance of the Person class """
+	""" Creates an instance of the Person class, 
+	Reads the data files """
 
 	def __init__(self):
-		#read name files
+
+		#read name files and log errors
 		from pathlib import Path
 
-		if not Path("female_names.json").is_file():
-			raise ValueError(f"Could not find file! female_names.json")
+		if not Path("data/female_names.json").is_file():
+			logging.info("Could not find file! data/female_names.json")
+			raise ValueError(f"Could not find file! data/female_names.json")
 
-		if not Path("male_names.json").is_file():
-			raise ValueError(f"Could not find file! male_names.json")
-
-		if not Path("surnames.json").is_file():
+		# Male
+		if not Path("data/male_names.json").is_file():
+			logging.info("Could not find file! data/male_names.json")
+			raise ValueError(f"Could not find file! data/male_names.json")
+			
+		# Surnames
+		if not Path("data/surnames.json").is_file():
+			logging.info("Could not find file! data/surnames.json")
 			raise ValueError(f"Could not find file! surnames.json")
-
-		if not Path("bio.json").is_file():
+			
+		# Bio's
+		if not Path("data/bio.json").is_file():
+			logging.info("Could not find file! data/bio.json")
 			raise ValueError(f"Could not find file! bio.json")
-
+			
+		# assign data
 		# male names
-		with open("male_names.json", 'r') as json_file:
-			male = {}
-			male = json.load(json_file)
-			self.Male_First_Name = male['male_forenames']
+		with open("data/male_names.json", 'r') as json_file:
+			data = json.load(json_file)
+			self.male_first_name = data['male_forenames']
 
 		# female names
-		with open("female_names.json", 'r') as json_file:
-			female = json.load(json_file)
-			self.Female_First_Name = female['female_forenames']
+		with open("data/female_names.json", 'r') as json_file:
+			data = json.load(json_file)
+			self.female_first_name = data['female_forenames']
 
 		# surnames
-		with open("surnames.json", 'r') as json_file:
-			surname = json.load(json_file)
-			self.Surname =surname['surnames']
+		with open("data/surnames.json", 'r') as json_file:
+			data = json.load(json_file)
+			self.surname = data['surnames']
 
-	def Male_First_Name(self, forename=""):
+		# bio's
+		with open("data/bio.json", 'r') as json_file:
+			data = json.load(json_file)
+			self.bio = data['jobs']
+
+### ### Main Methods ### ### 
+
+	def male_first_name(self, forename=""):
 		""" Returns a random male name """
 		if forename == None:
-			return random.choice(self.Male_First_Name())
+			return random.choice(self.male_first_name())
 		else:
 			return forename
 
-	def Female_First_Name(self, forename=""):
+	def female_first_name(self, forename=""):
 		""" Returns a random female name """
 		if forename == None:
-			return random.choice(self.Female_First_Name())
+			return random.choice(self.female_first_name())
 		else:
 			return forename
 	
-	def Surname(self, surname=""):
+	def surname(self, surname=""):
 		""" Returns a random surname """
-		if forename == None:
-			return random.choice(self.Surname())
+		if surname == None:
+			return random.choice(self.surname())
 		else:
 			return surname
-	
 
-	def Bio_File(self, filename="bio.json"):
-		pass
+	def gender(self, gender):
+		""" Assigns or returns a gender (str) """
+		if gender == None:
+			self.gender = random.choice("male", "female")
+		else:
+			self.gender = gender
+		return self.gender
 
-	def Create_Random(self):
+	def age(self, age=None):
+		""" Generates a random age 16 - 100 if none supplied """
+		if age == None:
+			self.age = random.randint(16,110)
+		else:
+			self.age = age
+		return self.age
+
+	def bio(self, bio=""):
+		if bio == None:
+			return random.choice(self.bio())
+		else:
+			return bio
+
+	def create_random(self):
 		""" Returns a tuple: Gender, Firstname, Lastname, Age, Bio, Picture """
 		sex = ("male", "female")
 		g = random.choice(sex)
 
 		if g == "male":
-			fn = self.Male_First_Name()
+			fn = self.male_first_name()
 		else:
-			fn = self.Female_First_Name()
+			fn = self.female_first_name()
 
-		self.Gender = g
-		a = self.Age()
-		sn = self.Surname()
-		b = self.Bio()
-		pf = self.Profile_Pic()
+		self.gender = g
+		a = self.age()
+		sn = self.surname()
+		b = self.bio()
+		pf = self.profile_pic()
 		# return as dict?
 
 		return (g, fn, sn, a, b, pf) #tuple
 
-	def Gender(self, gender):
-		""" Assigns or returns a gender (str) """
-		self.Gender = gender
-		return self.Gender
-
-	def Age(self, age=None):
-		""" Generates a random age 18- 100 """
-		if age == None:
-			a = random.randint(0,110)
-		else:
-			a = age
-		return a
-
-	def Bio(self):
-		""" Returns a random bio """
-		bio = (
-		"Toilet Cleaner",
-		"Head Pooper",
-		"Nappy Licker",
-		"Ear chewer",
-		"Eye Licker",
-		"House Smoosher",
-		"Fart Smeller"
-		)
-		return random.choice(bio)
-
-	def Profile_Pic(self):
+	def profile_pic(self):
 		""" Returns a random picture """
-		if self.Gender == "male":
+		if self.gender == "male":
 
 			male_picture = (
 				"male_pic1.jpg",
@@ -129,26 +140,3 @@ class Person:
 				"female_pic3.jpg"
 			)
 		return random.choice(female_picture)
-	
-m = Person()
-print(m.Gender("male"))
-print(random.choice(m.Male_First_Name))
-print(random.choice(m.Surname))
-print(m.Age())
-print(m.Bio())
-print(m.Profile_Pic())
-
-'''
-f = Person()
-print(f.Gender)
-print(f.Female_First_Name())
-print(f.Surname())
-print(f.Age())
-print(f.Bio())
-print(f.ProfilePic())
-
-'''
-
-#p = Person()
-#r = p.Male_First_Name()
-#print(r)
