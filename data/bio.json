@@ -1,17 +1,7 @@
 {
 
-    "jobs":[
-        "Pilot",
-        "Cleaner",
-        "Plumber",
-        "Engineer",
-        "Electrician",
-        "Doctor",
-        "Lawyer",
-        "Teacher",
-        "Police Officer",
-        "Politician",
-        "Driver"
+    "info":[
+        "INSERT RANDOM PERSONALITY INFO"
     ]
 
 }
