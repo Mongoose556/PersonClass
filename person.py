@@ -31,12 +31,12 @@ class Person:
 		# Surnames
 		if not Path("data/surnames.json").is_file():
 			logging.info("Could not find file! data/surnames.json")
-			raise ValueError(f"Could not find file! surnames.json")
+			raise ValueError(f"Could not find file! data/surnames.json")
 			
-		# Bio's
-		if not Path("data/bio.json").is_file():
-			logging.info("Could not find file! data/bio.json")
-			raise ValueError(f"Could not find file! bio.json")
+		# job's
+		if not Path("data/jobs.json").is_file():
+			logging.info("Could not find file! data/jobs.json")
+			raise ValueError(f"Could not find file! data/jobs.json")
 			
 		# assign data
 		# male names
@@ -54,43 +54,42 @@ class Person:
 			data = json.load(json_file)
 			self.surname = data['surnames']
 
-		# bio's
-		with open("data/bio.json", 'r') as json_file:
+		# job's
+		with open("data/jobs.json", 'r') as json_file:
 			data = json.load(json_file)
-			self.bio = data['jobs']
+			self.job = data['occupations']
 
 ### ### Main Methods ### ### 
 
 	def male_first_name(self, forename=""):
-		""" Returns a random male name """
-		if forename == None:
-			return random.choice(self.male_first_name())
-		else:
-			return forename
+		""" Returns a dictionary of names or accepts a variable """
+		self.male_first_name = forename
+		return self.male_first_name
+
 
 	def female_first_name(self, forename=""):
-		""" Returns a random female name """
-		if forename == None:
-			return random.choice(self.female_first_name())
-		else:
-			return forename
+		""" Returns a dictionary of names or accepts a variable """
+		self.female_first_name = forename
+		return self.female_first_name
 	
-	def surname(self, surname=""):
-		""" Returns a random surname """
-		if surname == None:
-			return random.choice(self.surname())
-		else:
-			return surname
 
-	def gender(self, gender):
+	def surname(self, surname=""):
+		""" Returns a dictionary of surnames or accepts a string """
+		self.female_first_name = surname
+		return self.surname
+
+
+	def gender(self, gender=None):
 		""" Assigns or returns a gender (str) """
 		if gender == None:
-			self.gender = random.choice("male", "female")
+			self.gender = random.choice(["male", "female"])
 		else:
 			self.gender = gender
 		return self.gender
 
+
 	def age(self, age=None):
+		# TODO: Accept only INT
 		""" Generates a random age 16 - 100 if none supplied """
 		if age == None:
 			self.age = random.randint(16,110)
@@ -98,30 +97,29 @@ class Person:
 			self.age = age
 		return self.age
 
-	def bio(self, bio=""):
-		if bio == None:
-			return random.choice(self.bio())
-		else:
-			return bio
+
+	def job(self, job=""):
+		self.job = job
+		return self.job
+
 
 	def create_random(self):
-		""" Returns a tuple: Gender, Firstname, Lastname, Age, Bio, Picture """
-		sex = ("male", "female")
-		g = random.choice(sex)
+		""" Returns a tuple: Gender, Firstname, Lastname, Age, job, Picture """
+		g = self.gender
 
 		if g == "male":
-			fn = self.male_first_name()
+			firstname = random.choice(self.male_first_name)
 		else:
-			fn = self.female_first_name()
+			fn = random.choice(self.female_first_name)
 
-		self.gender = g
-		a = self.age()
-		sn = self.surname()
-		b = self.bio()
+		a = self.age
+		sn = self.surname
+		j = self.job
 		pf = self.profile_pic()
 		# return as dict?
 
-		return (g, fn, sn, a, b, pf) #tuple
+		return (g, fn, sn, a, j, pf) #tuple
+
 
 	def profile_pic(self):
 		""" Returns a random picture """

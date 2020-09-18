@@ -1,16 +1,23 @@
 from person import Person
 import random
 
-f"{name.lower()} is funny."
+p = Person()
+'''
+print(f"Gender: {p.gender()}")
 
-m = Person()
-print(f"Gender: {m.gender("male")}")
-print(f" Forename: {random.choice(m.male_first_name)}")
-print(f"Surname: {random.choice(m.surname)}")
-print(f"Age: {m.age()}")
-print(f" Job: {m.bio}")
-print(f"Picture: {m.profile_pic()}")
-    
+if p.gender == "male":
+    print(f"Forename: {random.choice(p.male_first_name)}")
+else:
+    print(f"Forename: {random.choice(p.female_first_name)} {random.choice(p.surname)}")
+
+print(f"Age: {p.age()}")
+print(f"    Job: {random.choice(p.job)}")
+
+#print(f"Picture: {p.profile_pic()}")
+'''
+x = p.create_random()
+
+print(x)
 
 
 '''
