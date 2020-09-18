@@ -105,20 +105,20 @@ class Person:
 
 	def create_random(self):
 		""" Returns a tuple: Gender, Firstname, Lastname, Age, job, Picture """
-		g = self.gender
+		g = self.gender()
 
 		if g == "male":
 			firstname = random.choice(self.male_first_name)
 		else:
-			fn = random.choice(self.female_first_name)
+			firstname = random.choice(self.female_first_name)
 
-		a = self.age
-		sn = self.surname
-		j = self.job
-		pf = self.profile_pic()
+		a = self.age()
+		surname = random.choice(self.surname)
+		job = random.choice(self.job)
+		pic = self.profile_pic()
 		# return as dict?
 
-		return (g, fn, sn, a, j, pf) #tuple
+		return (g, firstname, surname, a, job, pic)
 
 
 	def profile_pic(self):
