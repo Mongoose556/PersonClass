@@ -2,6 +2,7 @@ from person import Person
 import random
 
 p = Person()
+
 '''
 print(f"Gender: {p.gender()}")
 
@@ -15,6 +16,7 @@ print(f"    Job: {random.choice(p.job)}")
 
 #print(f"Picture: {p.profile_pic()}")
 '''
+
 x = p.create_random()
 
 print(x)

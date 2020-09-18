@@ -118,7 +118,11 @@ class Person:
 		pic = self.profile_pic()
 		# return as dict?
 
-		return (g, firstname, surname, a, job, pic)
+		x = []
+
+		x = [g, firstname, surname, a, job, pic]
+
+		return x
 
 
 	def profile_pic(self):
