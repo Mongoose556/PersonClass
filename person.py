@@ -118,9 +118,9 @@ class Person:
 		pic = self.profile_pic()
 		# return as dict?
 
-		x = []
+		x = ()
 
-		x = [g, firstname, surname, a, job, pic]
+		x = (g, firstname, surname, a, job, pic)
 
 		return x
 
