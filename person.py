@@ -150,7 +150,7 @@ class Person:
 
 		x = ()
 
-		x = (gender, firstname, surname, age, birth_year, job, pic)
+		x = (gender, firstname, surname, age, job, pic)
 
 		return x
 
